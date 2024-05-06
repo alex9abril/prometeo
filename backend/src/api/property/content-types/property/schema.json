@@ -1,0 +1,103 @@
+{
+  "kind": "collectionType",
+  "collectionName": "properties",
+  "info": {
+    "singularName": "property",
+    "pluralName": "properties",
+    "displayName": "property",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "tipoInmueble": {
+      "type": "enumeration",
+      "enum": [
+        "Casa",
+        "Departamento"
+      ],
+      "required": true
+    },
+    "lugarEstacionamiento": {
+      "type": "integer",
+      "required": true,
+      "default": 0
+    },
+    "almacen": {
+      "type": "boolean"
+    },
+    "areaLavado": {
+      "type": "boolean"
+    },
+    "dormitorio": {
+      "type": "integer",
+      "required": true,
+      "default": 1
+    },
+    "destinoArrendamiento": {
+      "type": "enumeration",
+      "enum": [
+        "Casa",
+        "Departamento",
+        "Local Comercial"
+      ],
+      "required": true
+    },
+    "fechaInicioVigencia": {
+      "type": "datetime"
+    },
+    "realizaInventario": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    },
+    "aceptaMascotas": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    },
+    "aval": {
+      "type": "enumeration",
+      "enum": [
+        "Obligado Solidario",
+        "Aval"
+      ]
+    },
+    "nombreBanco": {
+      "type": "string"
+    },
+    "titularCuenta": {
+      "type": "string"
+    },
+    "noCuenta": {
+      "type": "string"
+    },
+    "CLABE": {
+      "type": "string"
+    },
+    "importeRenta": {
+      "type": "decimal",
+      "required": true
+    },
+    "incluyeIva": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    },
+    "mantenimiento": {
+      "type": "decimal"
+    },
+    "incluyeMantenimiento": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "address": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::address.address"
+    }
+  }
+}

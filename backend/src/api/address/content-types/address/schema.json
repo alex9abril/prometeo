@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "addresses",
+  "info": {
+    "singularName": "address",
+    "pluralName": "addresses",
+    "displayName": "address"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "cp": {
+      "type": "string"
+    },
+    "noExterior": {
+      "type": "string"
+    },
+    "noInterior": {
+      "type": "string"
+    },
+    "calle": {
+      "type": "string"
+    },
+    "colonia": {
+      "type": "string"
+    },
+    "municipio": {
+      "type": "string"
+    },
+    "estado": {
+      "type": "string"
+    }
+  }
+}

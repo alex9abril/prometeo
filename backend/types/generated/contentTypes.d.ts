@@ -788,6 +788,239 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiAccountAccount extends Schema.CollectionType {
+  collectionName: 'accounts';
+  info: {
+    singularName: 'account';
+    pluralName: 'accounts';
+    displayName: 'account';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    email: Attribute.Email & Attribute.Required & Attribute.Unique;
+    users_permissions_user: Attribute.Relation<
+      'api::account.account',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::account.account',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::account.account',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiAddressAddress extends Schema.CollectionType {
+  collectionName: 'addresses';
+  info: {
+    singularName: 'address';
+    pluralName: 'addresses';
+    displayName: 'address';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    cp: Attribute.String;
+    noExterior: Attribute.String;
+    noInterior: Attribute.String;
+    calle: Attribute.String;
+    colonia: Attribute.String;
+    municipio: Attribute.String;
+    estado: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::address.address',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::address.address',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiOwnerOwner extends Schema.CollectionType {
+  collectionName: 'owners';
+  info: {
+    singularName: 'owner';
+    pluralName: 'owners';
+    displayName: 'owner';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nombre: Attribute.String & Attribute.Required;
+    paterno: Attribute.String & Attribute.Required;
+    materno: Attribute.String & Attribute.Required;
+    correo: Attribute.Email;
+    identificacion: Attribute.String & Attribute.Required;
+    properties: Attribute.Relation<
+      'api::owner.owner',
+      'oneToMany',
+      'api::property.property'
+    >;
+    tipoIdentificacion: Attribute.Enumeration<['INE', 'Pasaporte']>;
+    telCasa: Attribute.String;
+    TelPersonal: Attribute.String;
+    address: Attribute.Relation<
+      'api::owner.owner',
+      'oneToOne',
+      'api::address.address'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::owner.owner',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::owner.owner',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPropertyProperty extends Schema.CollectionType {
+  collectionName: 'properties';
+  info: {
+    singularName: 'property';
+    pluralName: 'properties';
+    displayName: 'property';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    tipoInmueble: Attribute.Enumeration<['Casa', 'Departamento']> &
+      Attribute.Required;
+    lugarEstacionamiento: Attribute.Integer &
+      Attribute.Required &
+      Attribute.DefaultTo<0>;
+    almacen: Attribute.Boolean;
+    areaLavado: Attribute.Boolean;
+    dormitorio: Attribute.Integer & Attribute.Required & Attribute.DefaultTo<1>;
+    destinoArrendamiento: Attribute.Enumeration<
+      ['Casa', 'Departamento', 'Local Comercial']
+    > &
+      Attribute.Required;
+    fechaInicioVigencia: Attribute.DateTime;
+    realizaInventario: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<true>;
+    aceptaMascotas: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<true>;
+    aval: Attribute.Enumeration<['Obligado Solidario', 'Aval']>;
+    nombreBanco: Attribute.String;
+    titularCuenta: Attribute.String;
+    noCuenta: Attribute.String;
+    CLABE: Attribute.String;
+    importeRenta: Attribute.Decimal & Attribute.Required;
+    incluyeIva: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<true>;
+    mantenimiento: Attribute.Decimal;
+    incluyeMantenimiento: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
+    address: Attribute.Relation<
+      'api::property.property',
+      'oneToOne',
+      'api::address.address'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::property.property',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::property.property',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTenantTenant extends Schema.CollectionType {
+  collectionName: 'tenants';
+  info: {
+    singularName: 'tenant';
+    pluralName: 'tenants';
+    displayName: 'tenant';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nombre: Attribute.String;
+    paterno: Attribute.String;
+    materno: Attribute.String;
+    email: Attribute.Email;
+    rfc: Attribute.String;
+    nacionalidad: Attribute.Enumeration<['Mexicana', 'EEUU']> &
+      Attribute.DefaultTo<'Mexicana'>;
+    estadoCivil: Attribute.Enumeration<['Soltero', 'Casado', 'No definido']>;
+    address: Attribute.Relation<
+      'api::tenant.tenant',
+      'oneToOne',
+      'api::address.address'
+    >;
+    profesion: Attribute.String;
+    gradoEstudio: Attribute.Enumeration<
+      ['B\u00E1sico', 'Medio Superior', 'Superior ', 'Maestria']
+    >;
+    tipoIdentificacion: Attribute.Enumeration<['INE', 'Pasaporte']>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::tenant.tenant',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::tenant.tenant',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -806,6 +1039,11 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::account.account': ApiAccountAccount;
+      'api::address.address': ApiAddressAddress;
+      'api::owner.owner': ApiOwnerOwner;
+      'api::property.property': ApiPropertyProperty;
+      'api::tenant.tenant': ApiTenantTenant;
     }
   }
 }
